@@ -45,8 +45,31 @@ end
 
 # p exp(10, 20)
 
-def deep_dup(array)
+# def deep_dup(array)
+#     new_arr = []
+#     array.each do |ele|
+#         if !ele.is_a? Array
+#             new_arr << ele 
+#         else
+#             new_arr << deep_dup(ele)
+#         end
+#     end
 
+#     return new_arr
+
+# end
+
+
+# array = [
+#   ["nuts", "bolts", "washers"],
+#   ["capacitors", "resistors", ["kory"], "inductors"]
+# ]
+# p deep_dup(array)
+
+
+
+
+def deep_dup(array)
     return array if !array.is_a? Array
     new_arr = []
     array.each {|subarray| new_arr << deep_dup(subarray)}
@@ -62,3 +85,32 @@ array = [
 ]
 
 p deep_dup(array)
+
+def fibonacci(n) #return first n fib numbers
+    return [] if n == 0 
+    return [0] if n == 1
+
+
+    seq = [0, 1]
+    while seq.length < n
+
+    seq << seq[-1] + seq[-2]
+    end
+
+    return seq
+end
+
+p fibonacci(15)
+
+def fibonacci_rec(n)
+    return [] if n == 0 
+    return [0] if n == 1
+    return [0,1] if n == 2
+
+
+    #produce next number 
+    #seq <<   seq[-1] + seq[-2]
+    fibonacci_rec(n-1) << fibonacci_rec(n-1)[-1] + fibonacci_rec(n-1)[-2]
+end
+
+p fibonacci_rec(15)
